@@ -191,3 +191,22 @@ btnLoan.addEventListener('click', function (e) {
     console.log('Loan amount is too low or no sufficient deposits found.')
   }
 })
+
+// Permite encerramento de conta com verificação de credenciais
+btnClose.addEventListener('click', function (e) {
+  e.preventDefault()
+  if (
+    inputCloseUsername.value === currentAccount.username &&
+    Number(inputClosePin.value) === currentAccount.pin
+  ) {
+    const index = accounts.findIndex(
+      (acc) => acc.username === currentAccount.username
+    )
+
+    accounts.splice(index, 1)
+    containerApp.style.opacity = 0
+    labelWelcome.textContent = 'Log in to get started'
+  }
+
+  inputCloseUsername.value = inputClosePin.value = ''
+})
