@@ -210,3 +210,12 @@ btnClose.addEventListener('click', function (e) {
 
   inputCloseUsername.value = inputClosePin.value = ''
 })
+
+//Implementa ordenação de movimentos por valor
+let sorted = false
+
+btnSort.addEventListener('click', function (e) {
+  e.preventDefault()
+  displayMovements(currentAccount.movements, !sorted)
+  sorted = !sorted
+})
