@@ -173,7 +173,7 @@ btnTransfer.addEventListener('click', function (e) {
   }
 });
 
-
+//Adiciona funcionalidade de empréstimo com verificação de depósito mínimo
 btnLoan.addEventListener('click', function (e) {
   e.preventDefault()
 
