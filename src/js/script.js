@@ -148,3 +148,46 @@ btnLogin.addEventListener('click', function (e) {
     updateUI(currentAccount)
   }
 })
+
+//Permite transferências entre usuários com validação de saldo
+btnTransfer.addEventListener('click', function (e) {
+  e.preventDefault();
+
+  const amount = Number(inputTransferAmount.value);
+  const receiverAcc = accounts.find(
+    acc => acc.username === inputTransferTo.value
+  );
+
+  inputTransferAmount.value = inputTransferTo.value = '';
+
+  if (
+    amount > 0 &&
+    receiverAcc &&
+    currentAccount.balance >= amount &&
+    receiverAcc?.username !== currentAccount.username
+  ) {
+    currentAccount.movements.push(-amount);
+    receiverAcc.movements.push(amount);
+
+    updateUI(currentAccount);
+  }
+});
+
+
+btnLoan.addEventListener('click', function (e) {
+  e.preventDefault()
+
+  const amount = Number(inputLoanAmount.value)
+  if (
+    amount > 0 &&
+    currentAccount.movements.some((mov) => mov >= amount * 0.1)
+  ) {
+    currentAccount.movements.push(amount)
+
+    updateUI(currentAccount)
+
+    inputLoanAmount.value = ''
+  } else {
+    console.log('Loan amount is too low or no sufficient deposits found.')
+  }
+})
