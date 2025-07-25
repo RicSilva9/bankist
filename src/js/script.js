@@ -147,6 +147,7 @@ btnLogin.addEventListener('click', function (e) {
 
     updateUI(currentAccount)
   }
+  else alert('Usuário ou PIN incorreto')
 })
 
 //Permite transferências entre usuários com validação de saldo
@@ -188,7 +189,7 @@ btnLoan.addEventListener('click', function (e) {
 
     inputLoanAmount.value = ''
   } else {
-    console.log('Loan amount is too low or no sufficient deposits found.')
+    alert('Empréstimo negado')
   }
 })
 
@@ -205,7 +206,7 @@ btnClose.addEventListener('click', function (e) {
 
     accounts.splice(index, 1)
     containerApp.style.opacity = 0
-    labelWelcome.textContent = 'Log in to get started'
+    labelWelcome.textContent = 'Faça login para começar'
   }
 
   inputCloseUsername.value = inputClosePin.value = ''
