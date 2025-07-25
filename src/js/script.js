@@ -60,6 +60,7 @@ const inputLoanAmount = document.querySelector('.form__input--loan-amount')
 const inputCloseUsername = document.querySelector('.form__input--user')
 const inputClosePin = document.querySelector('.form__input--pin')
 
+//Implementa exibição de movimentos, saldo e resumo da conta.
 const displayMovements = function (movements, sort = false) {
   containerMovements.innerHTML = ''
 
@@ -124,3 +125,26 @@ const createUsernames = function (accs) {
 }
 
 createUsernames(accounts)
+
+//Adiciona funcionalidade de login com verificação de credenciais
+let currentAccount
+
+btnLogin.addEventListener('click', function (e) {
+  e.preventDefault()
+
+  currentAccount = accounts.find(
+    (acc) => acc.username === inputLoginUsername.value
+  )
+
+  if (currentAccount?.pin === Number(inputLoginPin.value)) {
+    labelWelcome.textContent = `Bem-vindo(a) de volta, ${
+      currentAccount.owner.split(' ')[0]
+    }!`
+    containerApp.style.opacity = 100
+
+    inputLoginUsername.value = inputLoginPin.value = ''
+    inputLoginPin.blur()
+
+    updateUI(currentAccount)
+  }
+})
